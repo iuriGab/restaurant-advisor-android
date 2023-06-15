@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="15dp">
+
+    <!--resturant's image-->
+    <ImageView
+        android:id="@+id/imageview_restaurant"
+        android:layout_width="99dp"
+        android:layout_height="99dp"
+        app:srcCompat="@drawable/cocobambu"/>
+
+    <!--like button-->
+    <ImageView
+        android:id="@+id/imageview_restaurant_button_like"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignEnd="@id/imageview_restaurant"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:srcCompat="@drawable/heart"
+        app:tint="#FFFFFF" />
+
+    <!--restaurant's type-->
+    <TextView
+        android:id="@+id/textview_restaurant_type"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_toEndOf="@+id/imageview_restaurant"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:text="Sophisticated"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:background="@drawable/rectangle"
+        tools:ignore="RtlSymmetry"/>
+
+    <!--restaurant's name-->
+    <TextView
+        android:id="@+id/textview_restaurant_name"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_below="@id/textview_restaurant_type"
+        android:layout_toEndOf="@+id/imageview_restaurant"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:text="Coco Bambu Conceito Eldorado"
+        android:textSize="16sp"
+        tools:ignore="RtlSymmetry"/>
+
+    <!--restaurant's rating -->
+    <TextView
+        android:id="@+id/textview_restaurant_ratingstring"
+        android:layout_width="85sp"
+        android:layout_height="25dp"
+        android:layout_toEndOf="@+id/imageview_restaurant"
+        android:layout_below="@id/textview_restaurant_name"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:text="Rating: 5.0"
+        android:textSize="15sp"
+        tools:ignore="RtlSymmetry"/>
+
+    <!--restaurant's stars (based on the rating)-->
+    <TextView
+        android:id="@+id/textview_restaurant_stars"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_below="@id/textview_restaurant_name"
+        android:layout_toEndOf="@id/textview_restaurant_ratingstring"
+        android:text="* * * * *"
+        android:paddingStart="10dp"
+        android:paddingEnd="5dp"/>
+
+    <!--ratingUsers(How many)-->
+    <TextView
+        android:id="@+id/textview_restaurant_ratingusers"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_below="@id/textview_restaurant_name"
+        android:layout_toEndOf="@+id/textview_restaurant_stars"
+        android:text="(2.135)"
+        tools:ignore="RtlSymmetry"
+        android:textColor="@color/material_on_surface_stroke"/>
+
+    <!--restaurant's cost-->
+    <TextView
+        android:id="@+id/textview_restaurant_cost"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_toEndOf="@+id/imageview_restaurant"
+        android:layout_below="@id/textview_restaurant_ratingstring"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:text="$$-$$$"
+        android:textSize="16sp"
+        tools:ignore="RtlSymmetry"/>
+
+</RelativeLayout>
