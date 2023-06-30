@@ -1,20 +1,12 @@
 package com.example.restaurantadvisorsp;
 
 public class Restaurant {
-    String id;
-    String name;
-    String type;
-    String photos;
-    String rating;
-    String cost;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    private String name;
+    private String type;
+    private String photos;
+    private String rating;
+    private String cost;
 
     public String getName() {
         return name;
@@ -56,4 +48,14 @@ public class Restaurant {
         this.cost = cost;
     }
 
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", photos='" + photos + '\'' +
+                ", rating='" + rating + '\'' +
+                ", cost='" + cost + '\'' +
+                '}';
+    }
 }

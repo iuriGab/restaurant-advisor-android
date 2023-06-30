@@ -1,65 +1,82 @@
 package com.example.restaurantadvisorsp;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    OkHttpClient client;
-    //String url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
-    String url = "https://localhost:8080/restaurants";
     String json;
     TextView textView;
+    Retrofit retrofit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        client = new OkHttpClient();
-        getRaiz();
+        textView = (TextView) findViewById(R.id.textview);
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.1.117:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        getApiData();
 
     }
 
-    public void getRaiz(){
-        Request request = new Request.Builder().url(url).build();
-        client.newCall(request).enqueue(new Callback() {
+    private void getApiData() {
+        RestaurantService apiService = retrofit.create(RestaurantService.class);
+
+        Call<List<Restaurant>> call = apiService.getRestaurants();
+        call.enqueue(new Callback<List<Restaurant>>() {
             @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                e.printStackTrace();
+            public void onResponse(Call<List<Restaurant>> call, Response<List<Restaurant>> response) {
+                if (response.isSuccessful()) {
+                    List<Restaurant> data = response.body();
+                    textView.setText(data.get(0).getName());
+                } else {
+                    // Handle error response
+                    int statusCode = response.code();
+                    String errorMessage = "Error: " + statusCode;
+
+                    // Check if the response body contains error details
+                    ResponseBody errorBody = response.errorBody();
+                    if (errorBody != null) {
+                        try {
+                            errorMessage = errorBody.string();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    // Display the error message
+                    textView.setText(errorMessage);
+                }
             }
 
             @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            json = response.body().string();
-                            Gson gson = new Gson();
-                            Restaurant[] restaurants = gson.fromJson(json, Restaurant[].class);
-
-                            textView.setText(restaurants.toString());
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                });
+            public void onFailure(Call<List<Restaurant>> call, Throwable t) {
+                // Handle network or other errors
+                Log.e("com.example.restaurant", t.getMessage());
+                textView.setText("Error: " + t.getMessage());
             }
         });
     }
-
-
 }
