@@ -7,6 +7,16 @@ public class Restaurant {
     private String photos;
     private String rating;
     private String cost;
+    private boolean liked;
+
+    // constructor and other methods
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
 
     public String getName() {
         return name;

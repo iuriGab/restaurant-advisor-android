@@ -1,5 +1,7 @@
 package com.example.restaurantadvisorsp;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
+import java.util.Random;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder>{
     private List<Restaurant> restaurants;
@@ -30,11 +35,54 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Restaurant restaurant = restaurants.get(position);
 
+        // method to define how many stars will show in the stars
+        float rating = Float.parseFloat(restaurant.getRating());
+        int integerRating = (int) rating;
+        String starRating = "";
+        for (int i = 0; i < integerRating; i++) {
+            starRating += "*";
+        }
+
+        // Set random number of users
+        Random random = new Random();
+        int randomNumber = random.nextInt(1000) + 1000; // Generate random number between 1000 and 2000
+
+        // Load image from URL and set it in the ImageView
+        Picasso.get().load(restaurant.getPhotos())
+                .fit()
+                .centerCrop()
+                .into(holder.photos);
         holder.name.setText(restaurant.getName());
         holder.type.setText(restaurant.getType());
-        //holder.photos.setImageURI(Uri.parse(restaurant.getPhotos()));
-        holder.rating.setText(restaurant.getRating());
+        holder.rating.setText("rating: " + restaurant.getRating());
+        // Set initial value for ratingUsers
+        final int[] ratingUsersValue = {randomNumber};
+        holder.ratingUsers.setText("(" + ratingUsersValue[0] + ")");
         holder.cost.setText(restaurant.getCost());
+        holder.stars.setText(starRating);
+
+        // Set up the OnClickListener for the like button
+        holder.buttonLike.setOnClickListener(new View.OnClickListener() {
+            private boolean isLiked = false;
+            private int clickCount = 0;
+
+            @Override
+            public void onClick(View v) {
+                isLiked = !isLiked;
+                int color = (isLiked) ? Color.RED : Color.WHITE;
+                holder.buttonLike.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+
+                // Increment or decrement ratingUsers value based on like button state
+                if (color == Color.RED) {
+                    clickCount++;
+                } else if (color == Color.WHITE) {
+                    clickCount--;
+                }
+
+                ratingUsersValue[0] += clickCount;
+                holder.ratingUsers.setText("(" + ratingUsersValue[0] + ")");
+            }
+        });
 
     }
 
@@ -51,18 +99,24 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         public final View view;
         public final TextView name;
         public final TextView type;
+        public final ImageView buttonLike;
         public final ImageView photos;
         public final TextView rating;
+        public final TextView ratingUsers;
         public final TextView cost;
+        public final TextView stars;
 
         public ViewHolder(View view) {
             super(view);
             this.view = view;
             name = view.findViewById(R.id.textview_restaurant_name);
             type = view.findViewById(R.id.textview_restaurant_type);
+            buttonLike = view.findViewById(R.id.imageview_restaurant_button_like);
             photos = view.findViewById(R.id.imageview_restaurant);
             rating = view.findViewById(R.id.textview_restaurant_ratingstring);
+            ratingUsers = view.findViewById(R.id.textview_restaurant_ratingusers);
             cost = view.findViewById(R.id.textview_restaurant_cost);
+            stars = view.findViewById(R.id.textview_restaurant_stars);
         }
 
     }
