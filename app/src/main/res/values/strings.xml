@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Restaurant Advisor</string>
+    <string name="vamos_juntos">Vamos juntos</string>
+    <string name="navegue_consoco_e_conhe_a_alguns_dos_restaurantes_mais_sofisticados_de_s_o_paulo">Navegue consoco e conheça alguns dos Restaurantes mais sofisticados de São Paulo!</string>
+    <string name="rating">Rating: ?.?</string>
+    <string name="cost">cost</string>
+    <string name="namerestaurant">nameRestaurant</string>
+    <string name="type">type</string>
 </resources>
