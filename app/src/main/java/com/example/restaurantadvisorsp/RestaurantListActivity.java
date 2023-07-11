@@ -18,7 +18,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class EntranceActivity extends AppCompatActivity {
+public class RestaurantListActivity extends AppCompatActivity {
 
     TextView textView;
     Retrofit retrofit;
@@ -28,10 +28,10 @@ public class EntranceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_entrance);
+        setContentView(R.layout.activity_restaurant_list);
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.104:8080/")
+                .baseUrl("http://192.168.1.113:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

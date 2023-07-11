@@ -6,4 +6,10 @@
     <string name="cost">cost</string>
     <string name="namerestaurant">nameRestaurant</string>
     <string name="type">type</string>
+    <string name="oi">oi</string>
+    <string name="coco_bambu_conceito_eldorado">Coco Bambu Conceito Eldorado</string>
+    <string name="melhor_restaurante_da_cidade_oferece_o_mais_amplo_card_pio_que_inclui_frutos_do_mar_peixes_carnes_grelhados_pizzas_e_crepes">Melhor restaurante da cidade, oferece o mais amplo cardápio, que inclui: frutos do mar, peixes, carnes, grelhados, pizzas e crepes.</string>
+    <string name="RestaurantImage">TODO</string>
+    <string name="sophisticated">Sophisticated</string>
+    <string name="endere_o_avenida_reboucas_3970_pinheiros_s_o_paulo_estado_de_s_o_paulo_05402_600">Endereço: Avenida Reboucas, 3970 - Pinheiros, São Paulo, Estado de São Paulo, 05402-600</string>
 </resources>

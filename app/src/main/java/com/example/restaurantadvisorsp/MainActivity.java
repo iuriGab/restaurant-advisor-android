@@ -16,16 +16,20 @@ public class MainActivity extends AppCompatActivity {
 
         Button button = findViewById(R.id.button_start);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(getMainActivity());
+
+
+    }
+
+    public View.OnClickListener getMainActivity() {
+        return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Crie um Intent para abrir a nova Activity
-                Intent intent = new Intent(MainActivity.this, EntranceActivity.class);
+                // Create an Intent to open the new Activity
+                Intent intent = new Intent(MainActivity.this, RestaurantListActivity.class);
                 startActivity(intent);
             }
-        });
-
-
+        };
     }
 
 }

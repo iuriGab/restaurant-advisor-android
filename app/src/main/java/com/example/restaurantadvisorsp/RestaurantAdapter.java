@@ -1,5 +1,7 @@
 package com.example.restaurantadvisorsp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
@@ -61,6 +63,17 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         holder.cost.setText(restaurant.getCost());
         holder.stars.setText(starRating);
 
+        holder.photos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the context from the holder's view
+                Context context = v.getContext();
+
+                // Create an Intent to open the new Activity
+                Intent intent = new Intent(context, RestaurantDetail.class);
+                context.startActivity(intent);
+            }
+        });
         // Set up the OnClickListener for the like button
         holder.buttonLike.setOnClickListener(new View.OnClickListener() {
             private boolean isLiked = false;
@@ -99,8 +112,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         public final View view;
         public final TextView name;
         public final TextView type;
+        public final TextView address;
+        public final TextView details;
         public final ImageView buttonLike;
         public final ImageView photos;
+        public final TextView hours;
         public final TextView rating;
         public final TextView ratingUsers;
         public final TextView cost;
@@ -111,8 +127,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             this.view = view;
             name = view.findViewById(R.id.textview_restaurant_name);
             type = view.findViewById(R.id.textview_restaurant_type);
+            address = view.findViewById(R.id.textview_restaurant_street);
+            details = view.findViewById(R.id.textview_restaurant_detail);
             buttonLike = view.findViewById(R.id.imageview_restaurant_button_like);
             photos = view.findViewById(R.id.imageview_restaurant);
+            hours = view.findViewById(R.id.textview_restaurant_hour);
             rating = view.findViewById(R.id.textview_restaurant_ratingstring);
             ratingUsers = view.findViewById(R.id.textview_restaurant_ratingusers);
             cost = view.findViewById(R.id.textview_restaurant_cost);
